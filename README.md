@@ -1,20 +1,27 @@
 # Razzle React Loadable Example
 
-## How to use
-Download the example [or clone the whole project](https://github.com/jaredpalmer/razzle.git):
+## Como usar:
+- Clone o projeto, rode um `npm install`;
 
-```bash
-curl https://codeload.github.com/jaredpalmer/razzle/tar.gz/master | tar -xz --strip=2 razzle-master/examples/with-react-loadable
-cd with-react-loadable
-```
+## Comandos:
+- Desenvolvimento: "npm run start:dev"
+- Produção em desenvolvimento: "npm run start:prod"
+- Produção: "npm run start"
+- Build: "npm run build"
 
-Install it and run:
+## O que esse boilerplate suporta?
 
-```bash
-yarn install
-yarn start
-```
+- [x] Componentes Assícronos
+- [x] Redux
+- [X] Server Side Render
+- [ ] Service Worker para Cache Offline
 
-## Idea behind the example
-This sample has the full SSR setup as described in the [react-loadable docs](https://github.com/thejameskyle/react-loadable#--------------server-side-rendering).
-It demonstrates simple dynamic imports using [react-loadable](https://github.com/thejameskyle/react-loadable) on top of SSR with razzle.
+## Inspirações:
+Esse projeto é uma evoluço do https://github.com/omariosouto/react-charger, que utiliza o excelente sistema de build do https://github.com/jaredpalmer/razzle/.
+O intuito é oferecer uma estrutura minima para qualquer projeto que precise de Server Render com React e que seja fácil de extender.
+
+## Extendendo com novas configurações
+
+Caso queira extender este boilerplate com algo como o Styled Components, recomendo fortemente olhar a lista de exemplos no Razzle e replicar em seu projeto: https://github.com/jaredpalmer/razzle/tree/next/examples 
+
+> OBS: O React Charger por padrão cobre boa parte das coisas mais usadas em projetos react, se tiver alguma sugestão mande um Pull Request :)
