@@ -9,6 +9,16 @@
 - Produção: "npm run start"
 - Build: "npm run build"
 
+## Como faz para pré carregar o state da aplicação?
+- Basta em qualquer componente que seja uma página, você adicionar essa função estática. Com ela o servidor irá mapear um JSON no mesmo formato que voc passou que fica acessível por meio da variável global: `window.__PRELOADED_STATE__`
+```js
+  static async getInitialData() {
+    return {
+      tweets: await fetch('https://twitelum-api.herokuapp.com/tweets').then((response) => response.json())
+    }
+  }
+```
+
 ## O que esse boilerplate suporta?
 
 - [x] Componentes Assícronos
