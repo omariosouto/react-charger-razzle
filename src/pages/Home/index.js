@@ -26,7 +26,7 @@ class Home extends Component {
 
   static async getInitialData() {
     return {
-      tweets: await fetch('http://twitelum-api.herokuapp.com/tweets').then((response) => response.json())
+      tweets: await fetch('https://twitelum-api.herokuapp.com/tweets').then((response) => response.json())
     }
   }
 
