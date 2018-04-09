@@ -14,7 +14,7 @@
 - [x] Componentes Assícronos
 - [x] Redux
 - [X] Server Side Render
-- [] Service Worker para Cache Offline
+- [ ] Service Worker para Cache Offline
 
 ## Inspirações:
 Esse projeto é uma evoluço do https://github.com/omariosouto/react-charger, que utiliza o excelente sistema de build do https://github.com/jaredpalmer/razzle/.
