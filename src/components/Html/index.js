@@ -7,11 +7,6 @@ const Html = ({ assets, markup, initialState }) => {
     const body = markup;
     const head = Helmet.renderStatic()
 
-    assets.chunks.map( chunk => {
-        console.log(chunk.file)
-        return chunk.file
-    });
-
     return (
         <html lang="en-US">
         <head>
