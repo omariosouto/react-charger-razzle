@@ -1,20 +1,17 @@
 # Razzle React Loadable Example
 
-## How to use
-Download the example [or clone the whole project](https://github.com/jaredpalmer/razzle.git):
+## Como usar:
+- Clone o projeto, rode um `npm install`;
 
-```bash
-curl https://codeload.github.com/jaredpalmer/razzle/tar.gz/master | tar -xz --strip=2 razzle-master/examples/with-react-loadable
-cd with-react-loadable
-```
+## Comandos:
+- Desenvolvimento: "npm run start:dev"
+- Produção em desenvolvimento: "npm run start:prod"
+- Produção: "npm run start"
+- Build: "npm run build"
 
-Install it and run:
+## O que esse boilerplate suporta?
 
-```bash
-yarn install
-yarn start
-```
-
-## Idea behind the example
-This sample has the full SSR setup as described in the [react-loadable docs](https://github.com/thejameskyle/react-loadable#--------------server-side-rendering).
-It demonstrates simple dynamic imports using [react-loadable](https://github.com/thejameskyle/react-loadable) on top of SSR with razzle.
+- [x] Componentes Assícronos
+- [x] Redux
+- [X] Server Side Render
+ 
