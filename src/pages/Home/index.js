@@ -88,7 +88,7 @@ const mapStateToProps = (stateDaStore) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     carregaTweets: () => {
-      fetch('http://twitelum-api.herokuapp.com/tweets').then((response) => response.json())
+      fetch('https://twitelum-api.herokuapp.com/tweets').then((response) => response.json())
         .then((response) => {
           console.log('disparou o carrega tweets :)', response)
           dispatch({ type: 'CARREGA_TWEETS', tweets: response })
