@@ -1,15 +1,15 @@
 import http from 'http';
 import Loadable from 'react-loadable';
 import app from './server';
+import dotenv from 'dotenv'
+dotenv.config()
 
 const server = http.createServer(app);
 
 let currentApp = app;
 
-console.log(process.env.HOST,process.env.PORT)
-
 Loadable.preloadAll().then(() => {
-  server.listen(process.env.PORT || 3000);
+  server.listen(process.env.PORT);
 });
 
 if (module.hot) {

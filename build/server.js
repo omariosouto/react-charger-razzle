@@ -20,7 +20,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "ecfece89ed1f288b9641"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "ce16777323dd65d5ccff"; // eslint-disable-line no-unused-vars
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
@@ -667,7 +667,7 @@
 /******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
 /******/
 /******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "http://localhost:3001/";
+/******/ 	__webpack_require__.p = "http://localhost:4601/";
 /******/
 /******/ 	// __webpack_hash__
 /******/ 	__webpack_require__.h = function() { return hotCurrentHash; };
@@ -681,7 +681,7 @@
 /***/ "./build/assets.json":
 /***/ (function(module, exports) {
 
-module.exports = {"client":{"js":"http://localhost:3001/static/js/bundle.js"}}
+module.exports = {"client":{"js":"http://localhost:4601/static/js/bundle.js"}}
 
 /***/ }),
 
@@ -1018,7 +1018,7 @@ var Html = function Html(_ref) {
                         fileName: _jsxFileName,
                         lineNumber: 34
                     }
-                }) : __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('script', { src: 'http://' + "localhost" + ':' + (parseInt("3000", 10) + 1) + '/' + chunk.file, __source: {
+                }) : __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('script', { src: 'http://' + "localhost" + ':' + (parseInt("4600", 10) + 1) + '/' + chunk.file, __source: {
                         fileName: _jsxFileName,
                         lineNumber: 35
                     }
@@ -1058,18 +1058,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_loadable__ = __webpack_require__("react-loadable");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_loadable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_loadable__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__server__ = __webpack_require__("./src/server/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_dotenv__ = __webpack_require__("dotenv");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_dotenv___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_dotenv__);
 
 
 
+
+__WEBPACK_IMPORTED_MODULE_3_dotenv___default.a.config();
 
 var server = __WEBPACK_IMPORTED_MODULE_0_http___default.a.createServer(__WEBPACK_IMPORTED_MODULE_2__server__["default"]);
 
 var currentApp = __WEBPACK_IMPORTED_MODULE_2__server__["default"];
 
-console.log("localhost", "3000");
-
 __WEBPACK_IMPORTED_MODULE_1_react_loadable___default.a.preloadAll().then(function () {
-  server.listen("3000" || 3000);
+  server.listen("4600");
 });
 
 if (true) {
@@ -2232,6 +2234,13 @@ module.exports = require("babel-runtime/helpers/possibleConstructorReturn");
 /***/ (function(module, exports) {
 
 module.exports = require("babel-runtime/regenerator");
+
+/***/ }),
+
+/***/ "dotenv":
+/***/ (function(module, exports) {
+
+module.exports = require("dotenv");
 
 /***/ }),
 
