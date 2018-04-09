@@ -12,11 +12,11 @@ import { doRedirect,
 
 // Coisas do React
 import React from 'react';
-import { StaticRouter, Route } from 'react-router-dom';
-import { renderToStaticMarkup } from 'react-dom/server';
+import { StaticRouter } from 'react-router-dom';
+// import { renderToStaticMarkup } from 'react-dom/server';
 
 // Coisas da Aplicação
-import Html from '../components/Html'
+// import Html from '../components/Html'
 import Routes from '../routes';
 
 // Coisas do Redux
@@ -30,6 +30,7 @@ import stats from '../../build/react-loadable.json';
 
 // !!!Remover!!!
 import { renderToString } from 'react-dom/server';
+import serialize from 'serialize-javascript'
 
 const assets = require(process.env.RAZZLE_ASSETS_MANIFEST);
 
@@ -55,30 +56,44 @@ server
       return false;
     }
 
-
-
-    const context = {};
-    const modules = [];
-    const markup = renderToString(
-      <Capture report={moduleName => modules.push(moduleName)}>
-        <StaticRouter context={context} location={request.url}>
-          <Routes />
-        </StaticRouter>
-      </Capture>
-    );
-
     // 4 - Extrai o componente
     getCurrentComponent(activeRoute.props)
       .then((component) => extractInitialData(component))
       .then(({component, initialData}) => {
+
+        const modules = [];
         
-          // Setup da aplicação no server (obrigatório)
+        // Setup da aplicação no server (obrigatório)
+        let markup = (
+          <StaticRouter context={ initialData } location={request.url}>
+            <Routes />
+          </StaticRouter>
+        )
+        // ./
+
+        // Configuração do Redux (opcional)
+        const store = configuraStore(initialData)
+        markup = (
+            <Provider store={store}>
+            {markup}
+            </Provider>
+        )
+        // ./
+
+        // Configuração do React Loadable (obrigatória)
+        markup = renderToString(
+          <Capture report={moduleName => modules.push(moduleName)}>
+            { markup }
+          </Capture>
+        );
         const bundles = getBundles(stats, modules);
         const chunks = bundles.filter(bundle => bundle.file.endsWith('.js'));
+        assets.chunks = chunks 
+        // ./
 
-        console.log(initialData)
 
-        resposta.status(200).send(
+        const initialState = initialData
+        resposta.status(status).send(
           `<!doctype html>
   <html lang="">
     <head>
@@ -89,6 +104,9 @@ server
       ${assets.client.css
         ? `<link rel="stylesheet" href="${assets.client.css}">`
         : ''}
+      ${initialState
+          ? `<script>window.__PRELOADED_STATE__ = ${serialize(initialState)};</script>`
+          : ''}
     </head>
     <body>
       <div id="root">${markup}</div>

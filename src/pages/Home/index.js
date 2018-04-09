@@ -1,11 +1,19 @@
 import React, { Component } from 'react';
 import Helmet from 'react-helmet'
 import { Link } from 'react-router-dom'
-import logo from '../../assets/img/react.svg';
+import Loadable from 'react-loadable'
 import './Home.css';
 import { connect } from 'react-redux'
 
+const Intro = Loadable({
+  loader: () => import('./components/Intro'),
+  loading: () => null,
+});
 
+const Logo = Loadable({
+  loader: () => import('./components/Logo'),
+  loading: () => null,
+});
 
 class Home extends Component {
   constructor() {
@@ -33,13 +41,10 @@ class Home extends Component {
       <div className="Home" >
         <Helmet title="React SSR - Página Home" />
         <div className="Home-header">
-          <img src={logo} className="Home-logo" alt="logo" />
-          <h2>Welcome to Razzle</h2>
+          <Logo />
+          <h1 className="Home-title">React Charger</h1>
         </div>
-        <p className="Home-intro">
-          To get started, edit <code>src/App.js</code> or{' '}
-          <code>src/Home.js</code> and save to reload.
-        </p>
+        <Intro />
         <ul className="Home-resources">
           <li>
             <Link to="/about">About</Link>
@@ -64,7 +69,7 @@ class Home extends Component {
         <div>
           <h1>List Async</h1>
           <ul>
-            { this.props.tweets.map((tweet) => <li key={tweet._id}>{tweet.conteudo}</li>) }
+            { this.props.tweets.map((tweet) => <li key={tweet._id}><strong>@{tweet.usuario.login}</strong>: {tweet.conteudo}</li>) }
           </ul>
         </div>
       </div>
