@@ -255,7 +255,7 @@ var server = __WEBPACK_IMPORTED_MODULE_0_http___default.a.createServer(__WEBPACK
 var currentApp = __WEBPACK_IMPORTED_MODULE_2__server__["a" /* default */];
 
 __WEBPACK_IMPORTED_MODULE_1_react_loadable___default.a.preloadAll().then(function () {
-  server.listen(3000 || 3000);
+  server.listen(process.env.PORT || 3000);
 });
 
 if (false) {
