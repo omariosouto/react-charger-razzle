@@ -13,10 +13,10 @@ import { doRedirect,
 // Coisas do React
 import React from 'react';
 import { StaticRouter } from 'react-router-dom';
-// import { renderToStaticMarkup } from 'react-dom/server';
+import { renderToStaticMarkup, renderToString } from 'react-dom/server';
 
 // Coisas da Aplicação
-// import Html from '../components/Html'
+import Html from '../components/Html'
 import Routes from '../routes';
 
 // Coisas do Redux
@@ -27,10 +27,6 @@ import configuraStore from '../store'
 import { Capture } from 'react-loadable';
 import { getBundles } from 'react-loadable/webpack';
 import stats from '../../build/react-loadable.json';
-
-// !!!Remover!!!
-import { renderToString } from 'react-dom/server';
-import serialize from 'serialize-javascript'
 
 const assets = require(process.env.RAZZLE_ASSETS_MANIFEST);
 
@@ -59,10 +55,7 @@ server
     // 4 - Extrai o componente
     getCurrentComponent(activeRoute.props)
       .then((component) => extractInitialData(component))
-      .then(({component, initialData}) => {
-
-        const modules = [];
-        
+      .then(({component, initialData}) => {        
         // Setup da aplicação no server (obrigatório)
         let markup = (
           <StaticRouter context={ initialData } location={request.url}>
@@ -81,6 +74,7 @@ server
         // ./
 
         // Configuração do React Loadable (obrigatória)
+        const modules = [];
         markup = renderToString(
           <Capture report={moduleName => modules.push(moduleName)}>
             { markup }
@@ -92,34 +86,12 @@ server
         // ./
 
 
-        const initialState = initialData
         resposta.status(status).send(
           `<!doctype html>
-  <html lang="">
-    <head>
-      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-      <meta charSet='utf-8' />
-      <title>Welcome to Razzle</title>
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      ${assets.client.css
-        ? `<link rel="stylesheet" href="${assets.client.css}">`
-        : ''}
-      ${initialState
-          ? `<script>window.__PRELOADED_STATE__ = ${serialize(initialState)};</script>`
-          : ''}
-    </head>
-    <body>
-      <div id="root">${markup}</div>
-      ${process.env.NODE_ENV === 'production'
-        ? `<script src="${assets.client.js}"></script>`
-        : `<script src="${assets.client.js}" crossorigin></script>`}
-      ${chunks.map(chunk => (process.env.NODE_ENV === 'production'
-        ? `<script src="/${chunk.file}"></script>`
-        : `<script src="http://${process.env.HOST}:${parseInt(process.env.PORT, 10) + 1}/${chunk.file}"></script>`
-      )).join('\n')}
-      <script>window.main();</script>
-    </body>
-  </html>`
+          ${renderToStaticMarkup(
+              <Html assets={assets} markup={markup} initialState={initialData} />
+            )
+          }`
         );
       })
   });
