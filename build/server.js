@@ -863,6 +863,9 @@ var App = function App() {
 var assets = __webpack_require__("./build/assets.json");
 
 var server = __WEBPACK_IMPORTED_MODULE_0_express___default()();
+
+console.log("localhost", 3000);
+
 server.disable('x-powered-by').use(__WEBPACK_IMPORTED_MODULE_0_express___default.a.static("/Users/soutomario/Desktop/with-react-loadable/build/public")).get('/*', function (request, resposta) {
   var status = 200;
 
