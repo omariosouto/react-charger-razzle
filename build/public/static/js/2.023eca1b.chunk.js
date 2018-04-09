@@ -1,0 +1,2 @@
+webpackJsonp([2],{"./src/pages/Home/components/Intro.js":function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var o=n("./node_modules/react/index.js"),a=n.n(o);t.default=function(){return a.a.createElement("p",{className:"Home-intro"},"To get started, edit ",a.a.createElement("code",null,"src/App.js")," or ",a.a.createElement("code",null,"src/Home.js")," and save to reload.")}}});
+//# sourceMappingURL=2.023eca1b.chunk.js.map

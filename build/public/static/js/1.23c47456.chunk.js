@@ -1,0 +1,2 @@
+webpackJsonp([1],{"./src/assets/img/react.svg":function(e,s,t){e.exports=t.p+"static/media/react.9a28da9f.svg"},"./src/pages/Home/components/Logo.js":function(e,s,t){"use strict";Object.defineProperty(s,"__esModule",{value:!0});var a=t("./node_modules/react/index.js"),o=t.n(a),c=t("./src/assets/img/react.svg"),n=t.n(c);s.default=function(){return o.a.createElement("img",{src:n.a,className:"Home-logo",alt:"logo"})}}});
+//# sourceMappingURL=1.23c47456.chunk.js.map
