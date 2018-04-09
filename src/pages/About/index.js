@@ -8,6 +8,12 @@ class About extends Component {
     counter: 0
   }
 
+  static async getInitialData() {
+    return {
+      tweets: await fetch('https://twitelum-api.herokuapp.com/tweets').then((response) => response.json())
+    }
+  }
+
   increment = () => {
     this.setState({
       counter: this.state.counter + 1

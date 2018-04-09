@@ -18,13 +18,14 @@ export function doRedirect(activeRoute, redirect) {
 }
 
 export function getCurrentComponent({ component }) {
-  if(component.awaitComponent) { // Load Async
-    return component.awaitComponent
+
+  if(component.preload) { // Load Async
+    return component.preload()
                     .then((component) => {
                       return component.default
                     })
   } else {
-    return new Promise((resolve) => {
+    return new Promise((resolve) => { // Load Sync
       resolve(component)
     })
   }
