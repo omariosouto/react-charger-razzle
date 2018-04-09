@@ -6,6 +6,8 @@ const server = http.createServer(app);
 
 let currentApp = app;
 
+console.log(process.env.HOST,process.env.PORT)
+
 Loadable.preloadAll().then(() => {
   server.listen(process.env.PORT || 3000);
 });
