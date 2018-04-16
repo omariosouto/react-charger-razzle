@@ -1,5 +1,6 @@
 // Coisas do Node
 import express from 'express';
+import cookieParser from 'cookie-parser'
 
 // Lib responsável por AJAX
 import 'universal-fetch';
@@ -32,6 +33,9 @@ const assets = require(process.env.RAZZLE_ASSETS_MANIFEST);
 
 const server = express();
 
+// Cookies Support
+server.use(cookieParser())
+
 server
   .disable('x-powered-by')
   .use(express.static(process.env.RAZZLE_PUBLIC_DIR))
@@ -55,7 +59,7 @@ server
 
     // 4 - Extrai o componente
     getCurrentComponent(activeRoute.props)
-      .then((component) => extractInitialData(component))
+      .then((component) => extractInitialData(component, request))
       .then(({component, initialData}) => {        
         // Setup da aplicação no server (obrigatório)
         let markup = (
@@ -68,7 +72,7 @@ server
         // Configuração do Redux (opcional)
         const store = configuraStore(initialData)
         markup = (
-            <Provider store={store}>
+          <Provider store={store}>
             {markup}
             </Provider>
         )
@@ -85,6 +89,8 @@ server
         const chunks = bundles.filter(bundle => bundle.file.endsWith('.js'));
         assets.chunks = chunks 
         // ./
+
+
 
 
         resposta.status(status).send(
