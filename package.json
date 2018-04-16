@@ -11,6 +11,7 @@
     "heroku-postbuild": "npm run build"
   },
   "dependencies": {
+    "cookie-parser": "^1.4.3",
     "dotenv": "^5.0.1",
     "express": "^4.16.2",
     "raf": "^3.4.0",
