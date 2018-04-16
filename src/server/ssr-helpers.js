@@ -31,11 +31,11 @@ export function getCurrentComponent({ component }) {
   }
 }
 
-export async function extractInitialData(component) {
+export async function extractInitialData(component, request) {
   let initialData = {};
 
   if(component.getInitialData) {
-    initialData = await component.getInitialData()
+    initialData = await component.getInitialData(request)
   }
 
   return {
