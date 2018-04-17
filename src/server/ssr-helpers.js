@@ -1,15 +1,26 @@
 import Routes from '../routes'
+import { matchPath } from 'react-router-dom'
+
 
 export function getActiveRouteFromRoutes(url, router) {
   const routesArray = Routes().props.children.map( route => route )
-  let activeRoute = routesArray.find( route => route.props.path.match(new RegExp(`${url}`)) ? route : false )
-  
+ 
+  let activeRoute = routesArray.find((route, index) => {
+    const routeInfoOnly = { path: route.props.path, exact: route.props.exact }
+    if(matchPath(url, routeInfoOnly)) {
+      return route
+    }
+
+    return false
+  })
+
   if(!activeRoute) { // Set 404 Route
       activeRoute = routesArray.find( route => route.props.path.match(/\*/) ? route : false )
   }
 
   return activeRoute
 }
+
 
 export function doRedirect(activeRoute, redirect) {
   if(activeRoute.props.render().props.to) {
