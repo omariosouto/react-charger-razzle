@@ -2,23 +2,29 @@ import Routes from '../routes'
 import { matchPath } from 'react-router-dom'
 
 
-export function getActiveRouteFromRoutes(url, router) {
+export function extractActiveRouteInfoFromRoutes(url, router) {
   const routesArray = Routes().props.children.map( route => route )
  
-  let activeRoute = routesArray.find((route, index) => {
+  const activeRoute = routesArray.find((route, index) => {
     const routeInfoOnly = { path: route.props.path, exact: route.props.exact }
     if(matchPath(url, routeInfoOnly)) {
-      return route
+      return true
     }
-
     return false
   })
 
-  if(!activeRoute) { // Set 404 Route
-      activeRoute = routesArray.find( route => route.props.path.match(/\*/) ? route : false )
+  let activeRouteInfo = {
+    route: activeRoute, 
+    params: matchPath(url, { path: activeRoute.props.path, exact: activeRoute.props.exact }).params
   }
 
-  return activeRoute
+  if(!activeRouteInfo.route) { // Set 404 Route
+      activeRouteInfo = {
+        route: routesArray.find( route => route.props.path.match(/\*/) ? route : false ),
+      }
+  }
+
+  return activeRouteInfo
 }
 
 
@@ -44,7 +50,7 @@ export function getCurrentComponent({ component }) {
 
 export async function extractInitialData(component, request) {
   let initialData = {};
-
+  // console.log('extractInitialData', component)
   if(component.getInitialData) {
     initialData = await component.getInitialData(request)
   }
