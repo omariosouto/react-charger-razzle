@@ -50,9 +50,6 @@ class Home extends Component {
             <Link to="/about">About</Link>
           </li>
           <li>
-            <Link to="/private-route">Private Route</Link>
-          </li>
-          <li>
             <Link to="/404crosstest">404 Page</Link>
           </li>
           <li>

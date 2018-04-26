@@ -4,7 +4,6 @@ import { matchPath } from 'react-router-dom'
 
 export function extractActiveRouteInfoFromRoutes(url, router) {
   const routesArray = Routes().props.children.map( route => route )
- 
   const activeRoute = routesArray.find((route, index) => {
     const routeInfoOnly = { path: route.props.path, exact: route.props.exact }
     if(matchPath(url, routeInfoOnly)) {
@@ -12,19 +11,24 @@ export function extractActiveRouteInfoFromRoutes(url, router) {
     }
     return false
   })
-
-  let activeRouteInfo = {
-    route: activeRoute, 
-    params: matchPath(url, { path: activeRoute.props.path, exact: activeRoute.props.exact }).params
+  
+  if(activeRoute) {
+    const activeRouteInfo = {
+      route: activeRoute, 
+      params: matchPath(url, { path: activeRoute.props.path, exact: activeRoute.props.exact }).params
+    }
+    return activeRouteInfo
   }
 
-  if(!activeRouteInfo.route) { // Set 404 Route
-      activeRouteInfo = {
-        route: routesArray.find( route => route.props.path.match(/\*/) ? route : false ),
+  if(!activeRoute) { // Set 404 Route
+    const activeRouteInfo = {
+      route: routesArray.find( route => {
+      return route.props.path.match(/\*/) ? route : false
+         }),
       }
+    return activeRouteInfo
   }
 
-  return activeRouteInfo
 }
 
 

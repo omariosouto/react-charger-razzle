@@ -95,7 +95,7 @@
       "file": "static/js/bundle.js.map"
     }
   ],
-  "/Users/soutomario/Desktop/with-react-loadable/src/client": [
+  "/Users/soutomario/Desktop/ssr-example/react-charger-razzle/src/client": [
     {
       "id": "./src/client.js",
       "name": "./src/client.js",
@@ -1871,7 +1871,7 @@
       "file": "static/js/bundle.js.map"
     }
   ],
-  "../../modules/_core": [
+  "../modules/_core": [
     {
       "id": "./node_modules/core-js/library/modules/_core.js",
       "name": "./node_modules/core-js/library/modules/_core.js",
@@ -2375,7 +2375,7 @@
       "file": "static/js/bundle.js.map"
     }
   ],
-  "/Users/soutomario/Desktop/with-react-loadable/node_modules/razzle-dev-utils/webpackHotDevClient.js": [
+  "/Users/soutomario/Desktop/ssr-example/react-charger-razzle/node_modules/razzle-dev-utils/webpackHotDevClient.js": [
     {
       "id": "./node_modules/razzle-dev-utils/webpackHotDevClient.js",
       "name": "./node_modules/razzle-dev-utils/webpackHotDevClient.js",

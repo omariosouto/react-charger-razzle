@@ -14,6 +14,7 @@ const App = () => (
   <Switch>
     <Route exact path="/" component={Home} />
     <Route exact path="/about" component={AsyncAbout} />
+    <Route path="*" component={() => <div>404 Page</div>} />
   </Switch>
 );
 
