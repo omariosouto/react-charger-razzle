@@ -9,18 +9,18 @@ import './assets/css/index.css'
 import Loadable from 'react-loadable';
 
 // Configuração do Redux
-// import { Provider } from 'react-redux'
-// import configuraStore from './store'
-// const store = configuraStore(window.__PRELOADED_STATE__)
+import { Provider } from 'react-redux'
+import configuraStore from './store'
+const store = configuraStore(window.__PRELOADED_STATE__)
 
 window.main = () => {
   Loadable.preloadReady().then(() => {
     hydrate(
-      /* <Provider store={store}> */
+       <Provider store={store}>
         <BrowserRouter>
           <Routes />
         </BrowserRouter>
-      /* </Provider> */,
+       </Provider>,
       document.getElementById('root')
     );
   });

@@ -3,9 +3,9 @@ import Helmet from 'react-helmet'
 import logo from '../../assets/img/react.svg';
 import './Home.css';
 import NavMenu from '../../components/NavMenu'
+import { connect } from 'react-redux'
 
 class Home extends Component {
-
   static async getInitialData() {
     try {
       return {
@@ -19,29 +19,9 @@ class Home extends Component {
     }
   }
 
-  constructor(props) {
-    super()
-    const isServer = props.staticContext
-    if(isServer) {
-      this.state = {
-        repos: props.staticContext.repos
-      }
-    } else {
-      this.state = {
-        repos: window.__PRELOADED_STATE__.repos || []
-      }
-      delete window.__PRELOADED_STATE__.repos
-    }
-  }
-
   componentDidMount() {
-    if(this.state.repos.length === 0) {
-      fetch('https://api.github.com/users/omariosouto/repos').then((response) => response.json())
-          .then((repos) => {
-            this.setState({
-              repos
-            })
-          })
+    if(this.props.repos.length === 0) {
+      this.props.carregaRepos()
     }
   }
 
@@ -63,7 +43,7 @@ class Home extends Component {
         <div>
           <h1>Getting Repos from GitHub and SSR it:</h1>
           <ul>
-            { this.state.repos.map((repo) => <li key={repo.id}>{repo.full_name}</li>) }
+            { this.props.repos.map((repo) => <li key={repo.id}>{repo.full_name}</li>) }
           </ul>
         </div>
       </div>
@@ -71,4 +51,22 @@ class Home extends Component {
   }
 }
 
-export default Home;
+const mapStateToProps = (stateDaStore) => {
+  return {
+    repos: stateDaStore.repos
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    carregaRepos: () => {
+      fetch('https://api.github.com/users/omariosouto/repos').then((response) => response.json())
+        .then((response) => {
+          console.log('disparou o carrega repos :)', response)
+          dispatch({ type: 'CARREGA_REPOS', repos: response })
+        })
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home)
