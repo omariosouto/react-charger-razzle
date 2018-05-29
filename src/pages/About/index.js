@@ -8,12 +8,6 @@ class About extends Component {
     counter: 0
   }
 
-  static async getInitialData() {
-    return {
-      tweets: await fetch('https://twitelum-api.herokuapp.com/tweets').then((response) => response.json())
-    }
-  }
-
   increment = () => {
     this.setState({
       counter: this.state.counter + 1
@@ -51,9 +45,9 @@ class About extends Component {
           </li>
 
           <div>
+            <button onClick={this.decrement}>decrement</button>
             {this.state.counter}
-            <button onClick={this.decrement}>increment</button>
-            <button onClick={this.increment}>decrement</button>
+            <button onClick={this.increment}>increment</button>
           </div>
         </ul>
       </div>

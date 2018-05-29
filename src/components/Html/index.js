@@ -30,9 +30,9 @@ const Html = ({ assets, markup, initialState }) => {
             ? <script src={assets.client.js}></script>
             : <script src={assets.client.js} crossOrigin="true"></script>}
 
-          {assets.chunks.map(chunk => (process.env.NODE_ENV === 'production'
-            ? <script src={chunk.file}></script>
-            : <script src={`http://${process.env.HOST}:${parseInt(process.env.PORT, 10) + 1}/${chunk.file}`}></script>
+          {assets.chunks.map((chunk, i) => (process.env.NODE_ENV === 'production'
+            ? <script key={i * 10} src={chunk.file}></script>
+            : <script key={i * 10} src={`http://${process.env.HOST}:${parseInt(process.env.PORT, 10) + 1}/${chunk.file}`}></script>
           ))}
           <script>window.main();</script>
         </body>

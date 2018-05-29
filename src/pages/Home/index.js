@@ -1,38 +1,47 @@
 import React, { Component } from 'react';
 import Helmet from 'react-helmet'
-import { Link } from 'react-router-dom'
-import Loadable from 'react-loadable'
+import logo from '../../assets/img/react.svg';
 import './Home.css';
-import { connect } from 'react-redux'
-
-const Intro = Loadable({
-  loader: () => import('./components/Intro'),
-  loading: () => null,
-});
-
-const Logo = Loadable({
-  loader: () => import('./components/Logo'),
-  loading: () => null,
-});
+import NavMenu from '../../components/NavMenu'
 
 class Home extends Component {
-  constructor() {
-    super()
 
-    this.state = {
-      tweets: []
+  static async getInitialData() {
+    try {
+      return {
+        repos:  await fetch('https://api.github.com/users/omariosouto/repos').then((response) => response.json())
+      }
+    } catch(error) {
+      // Se algum erro acontecer: console.log(error)
+      return {
+        repos: []
+      }
     }
   }
 
-  static async getInitialData() {
-    return {
-      tweets: await fetch('https://twitelum-api.herokuapp.com/tweets').then((response) => response.json())
+  constructor(props) {
+    super()
+    const isServer = props.staticContext
+    if(isServer) {
+      this.state = {
+        repos: props.staticContext.repos
+      }
+    } else {
+      this.state = {
+        repos: window.__PRELOADED_STATE__.repos || []
+      }
+      delete window.__PRELOADED_STATE__.repos
     }
   }
 
   componentDidMount() {
-    if(this.props.tweets.length === 0) {
-      this.props.carregaTweets()
+    if(this.state.repos.length === 0) {
+      fetch('https://api.github.com/users/omariosouto/repos').then((response) => response.json())
+          .then((repos) => {
+            this.setState({
+              repos
+            })
+          })
     }
   }
 
@@ -41,32 +50,20 @@ class Home extends Component {
       <div className="Home" >
         <Helmet title="React SSR - Página Home" />
         <div className="Home-header">
-          <Logo />
-          <h1 className="Home-title">React Charger</h1>
+          <img src={logo} className="Home-logo" alt="logo" />
+          <h2>Welcome to React Charger Razzle: React + React Router</h2>
         </div>
-        <Intro />
-        <ul className="Home-resources">
-          <li>
-            <Link to="/about">About</Link>
-          </li>
-          <li>
-            <Link to="/404crosstest">404 Page</Link>
-          </li>
-          <li>
-            <a href="https://github.com/jaredpalmer/razzle">Docs</a>
-          </li>
-          <li>
-            <a href="https://github.com/jaredpalmer/razzle/issues">Issues</a>
-          </li>
-          <li>
-            <a href="https://palmer.chat">Community Slack</a>
-          </li>
-        </ul>
+        <p className="Home-intro">
+          To get started, edit <code>./src/client.js</code> or{' '}
+          <code>./src/pages/Home.js</code> and save to reload.
+        </p>
+
+        <NavMenu />
 
         <div>
-          <h1>List Async</h1>
+          <h1>Getting Repos from GitHub and SSR it:</h1>
           <ul>
-            { this.props.tweets.map((tweet) => <li key={tweet._id}><strong>@{tweet.usuario.login}</strong>: {tweet.conteudo}</li>) }
+            { this.state.repos.map((repo) => <li key={repo.id}>{repo.full_name}</li>) }
           </ul>
         </div>
       </div>
@@ -74,24 +71,4 @@ class Home extends Component {
   }
 }
 
-// export default Home
-
-const mapStateToProps = (stateDaStore) => {
-  return {
-    tweets: stateDaStore.tweets
-  }
-}
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    carregaTweets: () => {
-      fetch('https://twitelum-api.herokuapp.com/tweets').then((response) => response.json())
-        .then((response) => {
-          console.log('disparou o carrega tweets :)', response)
-          dispatch({ type: 'CARREGA_TWEETS', tweets: response })
-        })
-    }
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Home)
+export default Home;

@@ -71,20 +71,20 @@ server
         // ./
 
         // Configuração do Redux (opcional)
-        const storeInicial = configuraStore() // Pega o esqueleto da store do redux
-        const store = configuraStore({
-          ...storeInicial.getState(),
-          ...initialData  
-        }) // Cria a store, somente alterando o dado passado, mas mantendo o esqueleto
+        // const storeInicial = configuraStore() // Pega o esqueleto da store do redux
+        // const store = configuraStore({
+        //   ...storeInicial.getState(),
+        //   ...initialData  
+        // }) // Cria a store, somente alterando o dado passado, mas mantendo o esqueleto
         
-        // Essa alteração deve ser feita, somente por conta do redux estar sendo aplicado no projeto
-        initialData = store.getState()
+        // // Essa alteração deve ser feita, somente por conta do redux estar sendo aplicado no projeto
+        // initialData = store.getState()
 
-        markup = (
-          <Provider store={store}>
-            {markup}
-          </Provider>
-        )
+        // markup = (
+        //   <Provider store={store}>
+        //     {markup}
+        //   </Provider>
+        // )
         // ./
 
         // Configuração do React Loadable (obrigatória)
