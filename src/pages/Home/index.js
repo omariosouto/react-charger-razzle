@@ -9,7 +9,7 @@ class Home extends Component {
   static async getInitialData() {
     try {
       return {
-        repos:  await fetch('https://api.github.com/users/omariosouto/repos').then((response) => response.json())
+        repos: await fetch('https://api.github.com/users/omariosouto/repos').then((response) => response.json())
       }
     } catch(error) {
       // Se algum erro acontecer: console.log(error)

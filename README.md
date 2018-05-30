@@ -19,12 +19,8 @@
   }
 ```
 
-## O que esse boilerplate suporta?
-
-- [x] Componentes Assícronos
-- [x] Redux
-- [X] Server Side Render
-- [ ] Service Worker para Cache Offline
+## Onde pegar mais informações?
+Acesse a documentação do projeto através do link: https://react-charger.gitbook.io/project/
 
 ## Inspirações:
 Esse projeto é uma evoluço do https://github.com/omariosouto/react-charger, que utiliza o excelente sistema de build do https://github.com/jaredpalmer/razzle/.
